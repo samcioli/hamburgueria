@@ -7,22 +7,18 @@ use App\Models\Pedido; // Certifique-se de que o modelo Pedido está sendo impor
 
 class PedidoController extends Controller
 {
-    // Método para exibir todos os pedidos
-// Exibir todos os pedidos
-public function index()
-{
-    // Recuperar todos os pedidos da tabela 'pedidos'
-    $pedidos = Pedido::all(); 
-
-    // Retornar os pedidos como JSON
-    return response()->json($pedidos);
-}
-
+    public function index()
+    {
+        $pedidos = Pedido::all();
+        return view('pedidos.index', compact('pedidos'));
+    }
+    
     // Exibir formulário de criação
     public function create()
     {
-        return view('pedidos.create'); // Retorna o formulário de criação de pedidos
+        return view('pedidos.create');
     }
+    
 
     // Salvar um novo pedido
     public function store(Request $request)

@@ -15,32 +15,36 @@
         <div>{{ session('success') }}</div>
     @endif
 
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Horário</th>
-                <th>Total</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($pedidos as $pedido)
+    @if($pedidos->isEmpty())
+        <p>Nenhum pedido encontrado.</p>
+    @else
+        <table>
+            <thead>
                 <tr>
-                    <td>{{ $pedido->idpedido }}</td>
-                    <td>{{ $pedido->horario }}</td>
-                    <td>{{ $pedido->total }}</td>
-                    <td>
-                        <a href="{{ route('pedidos.edit', $pedido->idpedido) }}">Editar</a>
-                        <form action="{{ route('pedidos.destroy', $pedido->idpedido) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit">Excluir</button>
-                        </form>
-                    </td>
+                    <th>ID</th>
+                    <th>Horário</th>
+                    <th>Total</th>
+                    <th>Ações</th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach ($pedidos as $pedido)
+                    <tr>
+                        <td>{{ $pedido->idpedido }}</td>
+                        <td>{{ $pedido->horario }}</td>
+                        <td>{{ $pedido->total }}</td>
+                        <td>
+                            <a href="{{ route('pedidos.edit', $pedido->idpedido) }}">Editar</a>
+                            <form action="{{ route('pedidos.destroy', $pedido->idpedido) }}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit">Excluir</button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    @endif
 </body>
 </html>

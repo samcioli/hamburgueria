@@ -22,6 +22,7 @@ Route::put('pessoas/{id}', [PessoaController::class, 'update'])->name('pessoas.u
 Route::delete('pessoas/{id}', [PessoaController::class, 'destroy'])->name('pessoas.destroy'); // Deletar uma pessoa
 
 Route::resource('pedidos', PedidoController::class);
+
     
 Route::get('/pagamentos', [PagamentoController::class, 'index'])->name('pagamentos-index');
 Route::get('/pagamentos/create', [PagamentoController::class, 'create'])->name('pagamentos-create');

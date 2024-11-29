@@ -1,21 +1,37 @@
-@extends('layouts.app')
+<!-- resources/views/pedidos/edit.blade.php -->
 
-@section('content')
-<div class="container">
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Pedido</title>
+</head>
+<body>
     <h1>Editar Pedido</h1>
+
+    <!-- Exibindo mensagens de erro ou sucesso -->
+    @if(session('success'))
+        <p style="color: green;">{{ session('success') }}</p>
+    @endif
+
     <form action="{{ route('pedidos.update', $pedido->idpedido) }}" method="POST">
         @csrf
         @method('PUT')
-        <div class="mb-3">
-            <label for="horario" class="form-label">Horário</label>
-            <input type="datetime-local" class="form-control" id="horario" name="horario" value="{{ $pedido->horario }}" required>
-        </div>
-        <div class="mb-3">
-            <label for="total" class="form-label">Total</label>
-            <input type="number" step="0.01" class="form-control" id="total" name="total" value="{{ $pedido->total }}" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Salvar</button>
-        <a href="{{ route('pedidos.index') }}" class="btn btn-secondary">Cancelar</a>
+
+        <!-- Campo para Horário -->
+        <label for="horario">Horário:</label>
+        <input type="datetime-local" name="horario" id="horario" value="{{ $pedido->horario->format('Y-m-d\TH:i') }}" required><br>
+
+        <!-- Campo para Total -->
+        <label for="total">Total:</label>
+        <input type="number" step="0.01" name="total" id="total" value="{{ $pedido->total }}" required><br>
+
+        <!-- Botão de Enviar -->
+        <button type="submit">Atualizar Pedido</button>
     </form>
-</div>
-@endsection
+
+    <br>
+    <a href="{{ route('pedidos.index') }}">Voltar para a lista de pedidos</a>
+</body>
+</html>
