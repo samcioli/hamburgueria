@@ -2,30 +2,35 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Cadastro de Item do Pedido</title>
+    <title>Criar Item de Pedido</title>
 </head>
 <body>
-    <h1>Cadastro de Item do Pedido</h1>
-
-    <form action="{{ route('itenspedido.store') }}" method="POST">
+    <h1>Criar Item de Pedido</h1>
+    <form action="{{ route('itempedidos.store') }}" method="POST">
         @csrf
-        <label>ID do Pedido: </label>
-        <input type="number" name="pedido_id" placeholder="Digite o ID do pedido" required>
-        <br><br>
-
-        <label>ID do Produto: </label>
-        <input type="number" name="produto_id" placeholder="Digite o ID do produto" required>
-        <br><br>
-
-        <label>Quantidade: </label>
-        <input type="number" name="quantidade" placeholder="Digite a quantidade" required>
-        <br><br>
-
-        <label>Preço Unitário: </label>
-        <input type="number" name="preco_unitario" step="0.01" placeholder="Digite o preço unitário" required>
-        <br><br>
-
-        <button type="submit">Cadastrar</button>
+        <div>
+            <label for="valorunitario">Valor Unitário:</label>
+            <input type="text" name="valorunitario" id="valorunitario" required>
+        </div>
+        <div>
+            <label for="quantidade">Quantidade:</label>
+            <input type="number" name="quantidade" id="quantidade" required>
+        </div>
+        <div>
+            <label for="subtotal">Subtotal:</label>
+            <input type="text" name="subtotal" id="subtotal" required>
+        </div>
+        <div>
+            <label for="observacoes">Observações:</label>
+            <textarea name="observacoes" id="observacoes"></textarea>
+        </div>
+        <div>
+            <label for="status">Status:</label>
+            <input type="number" name="status" id="status" required>
+        </div>
+        <div>
+            <button type="submit">Criar Item</button>
+        </div>
     </form>
 </body>
 </html>

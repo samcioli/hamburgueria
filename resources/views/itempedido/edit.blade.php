@@ -2,32 +2,36 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Editar Item do Pedido</title>
+    <title>Editar Item de Pedido</title>
 </head>
 <body>
-    <h1>Editar Item do Pedido</h1>
-
-    <form action="{{ route('itenspedido.update', ['id' => $itemPedido->iditem_pedido]) }}" method="POST">
+    <h1>Editar Item de Pedido</h1>
+    <form action="{{ route('itempedidos.update', $itemPedido->id) }}" method="POST">
         @csrf
         @method('PUT')
-
-        <label>ID do Pedido: </label>
-        <input type="number" name="pedido_id" value="{{ $itemPedido->pedido_id }}" required>
-        <br><br>
-
-        <label>ID do Produto: </label>
-        <input type="number" name="produto_id" value="{{ $itemPedido->produto_id }}" required>
-        <br><br>
-
-        <label>Quantidade: </label>
-        <input type="number" name="quantidade" value="{{ $itemPedido->quantidade }}" required>
-        <br><br>
-
-        <label>Preço Unitário: </label>
-        <input type="number" name="preco_unitario" step="0.01" value="{{ $itemPedido->preco_unitario }}" required>
-        <br><br>
-
-        <button type="submit">Atualizar</button>
+        <div>
+            <label for="valorunitario">Valor Unitário:</label>
+            <input type="text" name="valorunitario" id="valorunitario" value="{{ $itemPedido->valorunitario }}" required>
+        </div>
+        <div>
+            <label for="quantidade">Quantidade:</label>
+            <input type="number" name="quantidade" id="quantidade" value="{{ $itemPedido->quantidade }}" required>
+        </div>
+        <div>
+            <label for="subtotal">Subtotal:</label>
+            <input type="text" name="subtotal" id="subtotal" value="{{ $itemPedido->subtotal }}" required>
+        </div>
+        <div>
+            <label for="observacoes">Observações:</label>
+            <textarea name="observacoes" id="observacoes">{{ $itemPedido->observacoes }}</textarea>
+        </div>
+        <div>
+            <label for="status">Status:</label>
+            <input type="number" name="status" id="status" value="{{ $itemPedido->status }}" required>
+        </div>
+        <div>
+            <button type="submit">Atualizar Item</button>
+        </div>
     </form>
 </body>
 </html>

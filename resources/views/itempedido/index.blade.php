@@ -2,37 +2,40 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Relação de Itens de Pedido</title>
+    <title>Lista de Itens de Pedido</title>
 </head>
 <body>
-    <h1>Relação de Itens de Pedido</h1>
+    <h1>Lista de Itens de Pedido</h1>
+
+    <a href="{{ route('itempedidos.create') }}">Criar Novo Item</a>
 
     <table border="1">
         <thead>
             <tr>
                 <th>ID</th>
-                <th>ID Pedido</th>
-                <th>ID Produto</th>
+                <th>Valor Unitário</th>
                 <th>Quantidade</th>
-                <th>Preço Unitário</th>
+                <th>Subtotal</th>
+                <th>Observações</th>
+                <th>Status</th>
                 <th>Ações</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($itensPedido as $item)
+            @foreach($itensPedido as $item)
                 <tr>
-                    <td>{{ $item->iditem_pedido }}</td>
-                    <td>{{ $item->pedido_id }}</td>
-                    <td>{{ $item->produto_id }}</td>
+                    <td>{{ $item->id }}</td>
+                    <td>{{ $item->valorunitario }}</td>
                     <td>{{ $item->quantidade }}</td>
-                    <td>{{ $item->preco_unitario }}</td>
+                    <td>{{ $item->subtotal }}</td>
+                    <td>{{ $item->observacoes }}</td>
+                    <td>{{ $item->status }}</td>
                     <td>
-                        <a href="{{ route('itenspedido.edit', ['id' => $item->iditem_pedido]) }}">Editar</a>
-
-                        <form action="{{ route('itenspedido.destroy', ['id' => $item->iditem_pedido]) }}" method="POST" style="display:inline;">
+                        <a href="{{ route('itempedidos.edit', $item->id) }}">Editar</a> |
+                        <form action="{{ route('itempedidos.destroy', $item->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit">Deletar</button>
+                            <button type="submit" onclick="return confirm('Tem certeza que deseja excluir este item?')">Excluir</button>
                         </form>
                     </td>
                 </tr>
@@ -40,7 +43,5 @@
         </tbody>
     </table>
 
-    <br>
-    <a href="{{ route('itenspedido.create') }}">Cadastrar Novo Item</a>
 </body>
 </html>

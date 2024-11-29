@@ -31,12 +31,7 @@ Route::get('/pagamentos/{id}/edit', [PagamentoController::class, 'edit'])->name(
 Route::put('/pagamentos/{id}', [PagamentoController::class, 'update'])->name('pagamentos-update');
 Route::delete('/pagamentos/{id}', [PagamentoController::class, 'destroy'])->name('pagamentos-destroy');
 
-Route::get('/itenspedido', [ItemPedidoController::class, 'index'])->name('itenspedido-index');
-Route::get('/itenspedido/create', [ItemPedidoController::class, 'create'])->name('itenspedido-create');
-Route::post('/itenspedido', [ItemPedidoController::class, 'store'])->name('itenspedido-store');
-Route::get('/itenspedido/{id}/edit', [ItemPedidoController::class, 'edit'])->name('itenspedido-edit');
-Route::put('/itenspedido/{id}', [ItemPedidoController::class, 'update'])->name('itenspedido-update');
-Route::delete('/itenspedido/{id}', [ItemPedidoController::class, 'destroy'])->name('itenspedido-destroy');
+Route::resource('itempedidos', ItemPedidoController::class);
 
 Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios-index');
 Route::get('/usuarios/create', [UsuarioController::class, 'create'])->name('usuarios-create');
