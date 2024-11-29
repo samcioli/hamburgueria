@@ -13,20 +13,16 @@ use App\Http\Controllers\PedidoController;
 Route::get('/', function () {
     return view('welcome'); });
 
-Route::get('/pessoas', [PessoaController::class, 'index'])->name('pessoas-index');
-Route::get('/pessoas/create', [PessoaController::class, 'create'])->name('pessoas-create');
-Route::post('/pessoas', [PessoaController::class, 'store'])->name('pessoas-store');
-Route::get('/pessoas/{id}/edit', [PessoaController::class, 'edit'])->name('pessoas-edit');
-Route::put('/pessoas/{id}', [PessoaController::class, 'update'])->name('pessoas-update');
-Route::delete('/pessoas/{id}', [PessoaController::class, 'destroy'])->name('pessoas-destroy');
+Route::get('pessoas', [PessoaController::class, 'index'])->name('pessoas.index'); // Listar todas as pessoas
+Route::get('pessoas/create', [PessoaController::class, 'create'])->name('pessoas.create'); // Formulário para criar uma pessoa
+Route::post('pessoas', [PessoaController::class, 'store'])->name('pessoas.store'); // Salvar nova pessoa
+Route::get('pessoas/{id}', [PessoaController::class, 'show'])->name('pessoas.show'); // Exibir uma pessoa específica
+Route::get('pessoas/{id}/edit', [PessoaController::class, 'edit'])->name('pessoas.edit'); // Formulário para editar uma pessoa
+Route::put('pessoas/{id}', [PessoaController::class, 'update'])->name('pessoas.update'); // Atualizar uma pessoa
+Route::delete('pessoas/{id}', [PessoaController::class, 'destroy'])->name('pessoas.destroy'); // Deletar uma pessoa
 
-Route::get('/pedidos', [PedidoController::class, 'index'])->name('pedidos-index');
-Route::get('/pedidos/create', [PedidoController::class, 'create'])->name('pedidos-create');
-Route::post('/pedidos', [PedidoController::class, 'store'])->name('pedidos-store');
-Route::get('/pedidos/{id}/edit', [PedidoController::class, 'edit'])->name('pedidos-edit');
-Route::put('/pedidos/{id}', [PedidoController::class, 'update'])->name('pedidos-update');
-Route::delete('/pedidos/{id}', [PedidoController::class, 'destroy'])->name('pedidos-destroy');
-
+Route::resource('pedidos', PedidoController::class);
+    
 Route::get('/pagamentos', [PagamentoController::class, 'index'])->name('pagamentos-index');
 Route::get('/pagamentos/create', [PagamentoController::class, 'create'])->name('pagamentos-create');
 Route::post('/pagamentos', [PagamentoController::class, 'store'])->name('pagamentos-store');

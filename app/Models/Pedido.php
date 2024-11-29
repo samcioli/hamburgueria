@@ -1,14 +1,15 @@
-<?php 
+<?php
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Pedido extends Model
 {
-    // Define os campos que são atribuíveis em massa
-    protected $fillable = ['pessoa_id', 'status', 'data_pedido', 'total'];
+    use HasFactory;
 
-    // Define a chave primária (caso seja diferente do padrão 'id')
-    protected $primaryKey = 'idpedido';
+    protected $table = 'pedidos'; // Caso o nome da tabela seja diferente do plural do nome da classe
+
+    protected $fillable = ['horario', 'total']; // Atributos que podem ser preenchidos em massa
 }

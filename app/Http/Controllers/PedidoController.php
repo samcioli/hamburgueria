@@ -1,82 +1,69 @@
 <?php
+
 namespace App\Http\Controllers;
 
-use App\Models\Pedido;
-use App\Models\Produto;
 use Illuminate\Http\Request;
+use App\Models\Pedido; // Certifique-se de que o modelo Pedido está sendo importado
 
 class PedidoController extends Controller
 {
-    public function index()
-    {
-        // Recupera todos os pedidos
-        $pedidos = Pedido::all();
-        return view('pedidos.index', ['pedidos' => $pedidos]);
-    }
+    // Método para exibir todos os pedidos
+// Exibir todos os pedidos
+public function index()
+{
+    // Recuperar todos os pedidos da tabela 'pedidos'
+    $pedidos = Pedido::all(); 
 
+    // Retornar os pedidos como JSON
+    return response()->json($pedidos);
+}
+
+    // Exibir formulário de criação
     public function create()
     {
-        // Recupera os produtos para permitir o cadastro do pedido
-        $produtos = Produto::all();
-        return view('pedidos.create', ['produtos' => $produtos]); // Retorna a view para criar um novo pedido
+        return view('pedidos.create'); // Retorna o formulário de criação de pedidos
     }
 
+    // Salvar um novo pedido
     public function store(Request $request)
     {
-        // Validação para garantir que todos os campos obrigatórios estão preenchidos
         $request->validate([
-            'pedido_id' => 'required|integer',
-            'produto_id' => 'required|integer|exists:produtos,id', // O produto precisa existir no banco
-            'quantidade' => 'required|integer|min:1',
-            'preco_unitario' => 'required|numeric|min:0.01',
+            'horario' => 'required|date', // Validação para o campo 'horario'
+            'total' => 'required|numeric|min:0', // Validação para o campo 'total'
         ]);
 
-        // Cria o pedido no banco de dados
-        Pedido::create([
-            'pedido_id' => $request->pedido_id,
-            'produto_id' => $request->produto_id,
-            'quantidade' => $request->quantidade,
-            'preco_unitario' => $request->preco_unitario,
-        ]);
+        Pedido::create($request->all()); // Cria um novo pedido com os dados do formulário
 
-        return redirect()->route('pedidos.index'); // Redireciona para a lista de pedidos
+        return redirect()->route('pedidos.index')->with('success', 'Pedido criado com sucesso!');
     }
 
+    // Exibir formulário de edição
     public function edit($id)
     {
-        // Recupera o pedido pelo ID
-        $pedido = Pedido::findOrFail($id);
-        $produtos = Produto::all(); // Para poder editar o produto do pedido
-        return view('pedidos.edit', ['pedido' => $pedido, 'produtos' => $produtos]);
+        $pedido = Pedido::findOrFail($id); // Encontra o pedido pelo ID, ou lança erro se não encontrado
+        return view('pedidos.edit', compact('pedido')); // Retorna o formulário de edição com os dados do pedido
     }
 
+    // Atualizar um pedido
     public function update(Request $request, $id)
     {
-        // Validação
         $request->validate([
-            'pedido_id' => 'required|integer',
-            'produto_id' => 'required|integer|exists:produtos,id',
-            'quantidade' => 'required|integer|min:1',
-            'preco_unitario' => 'required|numeric|min:0.01',
+            'horario' => 'required|date', // Validação para o campo 'horario'
+            'total' => 'required|numeric|min:0', // Validação para o campo 'total'
         ]);
 
-        // Recupera o pedido
-        $pedido = Pedido::findOrFail($id);
-        $pedido->update([
-            'pedido_id' => $request->pedido_id,
-            'produto_id' => $request->produto_id,
-            'quantidade' => $request->quantidade,
-            'preco_unitario' => $request->preco_unitario,
-        ]);
+        $pedido = Pedido::findOrFail($id); // Encontra o pedido pelo ID, ou lança erro se não encontrado
+        $pedido->update($request->all()); // Atualiza os dados do pedido
 
-        return redirect()->route('pedidos.index'); // Redireciona para a lista de pedidos
+        return redirect()->route('pedidos.index')->with('success', 'Pedido atualizado com sucesso!');
     }
 
+    // Deletar um pedido
     public function destroy($id)
     {
-        // Deleta o pedido
-        Pedido::findOrFail($id)->delete();
-        return redirect()->route('pedidos.index'); // Redireciona para a lista de pedidos
+        $pedido = Pedido::findOrFail($id); // Encontra o pedido pelo ID, ou lança erro se não encontrado
+        $pedido->delete(); // Deleta o pedido
+
+        return redirect()->route('pedidos.index')->with('success', 'Pedido excluído com sucesso!');
     }
 }
-?>
