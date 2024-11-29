@@ -1,17 +1,14 @@
-<?php
+<?php 
 
-class ItemPedido {
-    public $valorUnitario;
-    public $quantidade;
-    public $subtotal;
-    public $observacoes;
-    public $status;
+namespace App\Models;
 
-    public function __construct($valorUnitario, $quantidade, $subtotal, $observacoes, $status) {
-        $this->valorUnitario = $valorUnitario;
-        $this->quantidade = $quantidade;
-        $this->subtotal = $subtotal;
-        $this->observacoes = $observacoes;
-        $this->status = $status;
-    }
+use Illuminate\Database\Eloquent\Model;
+
+class ItemPedido extends Model
+{
+    // Define os campos que são atribuíveis em massa
+    protected $fillable = ['pedido_id', 'produto_id', 'quantidade', 'preco_unitario'];
+
+    // Define a chave primária (caso seja diferente do padrão 'id')
+    protected $primaryKey = 'iditem_pedido';
 }

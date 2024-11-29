@@ -1,15 +1,14 @@
-<?php
+<?php 
 
+namespace App\Models;
 
+use Illuminate\Database\Eloquent\Model;
 
-class Pedido {
-    public $idPedido;
-    public $horario;
-    public $total;
+class Pedido extends Model
+{
+    // Define os campos que são atribuíveis em massa
+    protected $fillable = ['pessoa_id', 'status', 'data_pedido', 'total'];
 
-    public function __construct($idPedido, $horario, $total) {
-        $this->idPedido = $idPedido;
-        $this->horario = $horario;
-        $this->total = $total;
-    }
+    // Define a chave primária (caso seja diferente do padrão 'id')
+    protected $primaryKey = 'idpedido';
 }

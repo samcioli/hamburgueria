@@ -1,17 +1,14 @@
 <?php
-class ItemPedidoController {
-    public function create($valorUnitario, $quantidade, $subtotal, $observacoes, $status) {
-        return new ItemPedido($valorUnitario, $quantidade, $subtotal, $observacoes, $status);
-    }
 
-    public function update(ItemPedido $itemPedido, $quantidade, $subtotal, $observacoes, $status) {
-        $itemPedido->quantidade = $quantidade;
-        $itemPedido->subtotal = $subtotal;
-        $itemPedido->observacoes = $observacoes;
-        $itemPedido->status = $status;
-    }
+namespace App\Http\Controllers;
 
-    public function delete(ItemPedido $itemPedido) {
-        unset($itemPedido);
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+
+class ItemPedidoController extends Controller
+{
+    public function index()
+    {
+        dd('Olá ItemPedido');
     }
 }

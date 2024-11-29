@@ -1,18 +1,14 @@
 <?php
 
+namespace App\Http\Controllers;
 
-class PedidoController {
-    public function create($idPedido, $horario, $total) {
-        return new Pedido($idPedido, $horario, $total);
-    }
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
-    public function update(Pedido $pedido, $horario, $total) {
-        $pedido->horario = $horario;
-        $pedido->total = $total;
-    }
-
-    public function delete(Pedido $pedido) {
-        unset($pedido);
+class PedidoController extends Controller
+{
+    public function index()
+    {
+        dd('Olá Pedido');
     }
 }
-

@@ -1,13 +1,14 @@
-<?php
+<?php 
 
-class Pessoa {
-    public $idPessoa;
-    public $nome;
-    public $email;
+namespace App\Models;
 
-    public function __construct($idPessoa, $nome, $email) {
-        $this->idPessoa = $idPessoa;
-        $this->nome = $nome;
-        $this->email = $email;
-    }
+use Illuminate\Database\Eloquent\Model;
+
+class Pessoa extends Model
+{
+    // Define os campos que são atribuíveis em massa
+    protected $fillable = ['nome', 'email', 'data_nascimento'];
+
+    // Define a chave primária (caso seja diferente do padrão 'id')
+    protected $primaryKey = 'idpessoa';
 }

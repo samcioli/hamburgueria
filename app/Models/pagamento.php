@@ -1,14 +1,14 @@
-<?php
-class Pagamento {
-    public $idPagamento;
-    public $horario;
-    public $valor;
-    public $tipo;
+<?php 
 
-    public function __construct($idPagamento, $horario, $valor, $tipo) {
-        $this->idPagamento = $idPagamento;
-        $this->horario = $horario;
-        $this->valor = $valor;
-        $this->tipo = $tipo;
-    }
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Pagamento extends Model
+{
+    // Define os campos que são atribuíveis em massa
+    protected $fillable = ['pedido_id', 'valor_pago', 'data_pagamento', 'metodo_pagamento'];
+
+    // Define a chave primária (caso seja diferente do padrão 'id')
+    protected $primaryKey = 'idpagamento';
 }
